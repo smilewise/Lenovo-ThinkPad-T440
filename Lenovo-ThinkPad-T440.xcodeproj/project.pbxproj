@@ -6,10 +6,23 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXFileReference section */
+		DF6CDFDC216EB08E00C31031 /* SSDT-T440.aml */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SSDT-T440.aml"; sourceTree = "<group>"; };
+		DF6CDFDD216EB08E00C31031 /* kexts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = kexts; sourceTree = "<group>"; };
+		DF6CDFDE216EB08E00C31031 /* hotpatch */ = {isa = PBXFileReference; lastKnownFileType = folder; path = hotpatch; sourceTree = "<group>"; };
+		DF6CDFDF216EB08E00C31031 /* config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		DF6CDFE0216EB08E00C31031 /* Audio */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Audio; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
 		DF6CDFD5216EB07D00C31031 = {
 			isa = PBXGroup;
 			children = (
+				DF6CDFE0216EB08E00C31031 /* Audio */,
+				DF6CDFDF216EB08E00C31031 /* config.plist */,
+				DF6CDFDE216EB08E00C31031 /* hotpatch */,
+				DF6CDFDD216EB08E00C31031 /* kexts */,
+				DF6CDFDC216EB08E00C31031 /* SSDT-T440.aml */,
 			);
 			sourceTree = "<group>";
 		};
