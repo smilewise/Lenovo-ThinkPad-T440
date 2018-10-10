@@ -7,7 +7,7 @@
 #ifndef NO_DEFINITIONBLOCK
 DefinitionBlock ("", "SSDT", 2, "T440", "_USB", 0)
 {
-    #endif
+#endif
     Device(UIAC)
     {
         Name(_HID, "UIA00000")
@@ -36,8 +36,8 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_USB", 0)
                     },
                     //"HS06", Package() // FingerPrint Reader
                     //{
-                    //"UsbConnector", 255,
-                    //"port", Buffer() { 6, 0, 0, 0 },
+                        //"UsbConnector", 255,
+                        //"port", Buffer() { 6, 0, 0, 0 },
                     //},
                     "HS07", Package() // Bluetooth
                     {
@@ -82,7 +82,7 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_USB", 0)
     {
         // do nothing
     }
-    #ifndef NO_DEFINITIONBLOCK
+#ifndef NO_DEFINITIONBLOCK
 }
 #endif
 //EOF
