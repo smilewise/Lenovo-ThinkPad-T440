@@ -1,0 +1,67 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXGroup section */
+		DF6CDFD5216EB07D00C31031 = {
+			isa = PBXGroup;
+			children = (
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		DF6CDFD6216EB07D00C31031 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+			};
+			buildConfigurationList = DF6CDFD9216EB07E00C31031 /* Build configuration list for PBXProject "Lenovo-ThinkPad-T440" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DF6CDFD5216EB07D00C31031;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		DF6CDFDA216EB07E00C31031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		DF6CDFDB216EB07E00C31031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DF6CDFD9216EB07E00C31031 /* Build configuration list for PBXProject "Lenovo-ThinkPad-T440" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF6CDFDA216EB07E00C31031 /* Debug */,
+				DF6CDFDB216EB07E00C31031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DF6CDFD6216EB07D00C31031 /* Project object */;
+}
