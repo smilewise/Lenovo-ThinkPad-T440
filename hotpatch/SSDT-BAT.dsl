@@ -79,68 +79,7 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_BAT", 0)
     External(CHKC, FieldUnitObj)
     External(CHKE, FieldUnitObj)
     External(WAKI, DeviceObj)
-    
-    Method (B1B2, 2, NotSerialized) { Return (Or (Arg0, ShiftLeft (Arg1, 8))) }
-    
-    Method (B1B4, 4, NotSerialized)
-    {
-
-        Store(Arg3, Local0)
-        Or(Arg2, ShiftLeft(Local0, 8), Local0)
-        Or(Arg1, ShiftLeft(Local0, 8), Local0)
-        Or(Arg0, ShiftLeft(Local0, 8), Local0)
-        Return(Local0)
-    }
-    
-    Method (RE1B, 1, NotSerialized)
-    {
-        OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
-        Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
-        Return(BYTE)
-    }
-    
-    Method (RECB, 2, Serialized)
-    // Arg0 - offset in bytes from zero-based EC
-    // Arg1 - size of buffer in bits
-    {
-        ShiftRight(Add(Arg1,7), 3, Arg1)
-        Name(TEMP, Buffer(Arg1) { })
-        Add(Arg0, Arg1, Arg1)
-        Store(0, Local0)
-        While (LLess(Arg0, Arg1))
-        {
-            Store(RE1B(Arg0), Index(TEMP, Local0))
-            Increment(Arg0)
-            Increment(Local0)
-        }
-        Return(TEMP)
-    }
-    
-    Method (WE1B, 2, NotSerialized)
-    {
-        OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
-        Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
-        Store(Arg1, BYTE)
-    }
-    
-    Method (WECB, 3, Serialized)
-    // Arg0 - offset in bytes from zero-based EC
-    // Arg1 - size of buffer in bits
-    // Arg2 - value to write
-    {
-        ShiftRight(Add(Arg1,7), 3, Arg1)
-        Name(TEMP, Buffer(Arg1) { })
-        Store(Arg2, TEMP)
-        Add(Arg0, Arg1, Arg1)
-        Store(0, Local0)
-        While (LLess(Arg0, Arg1))
-        {
-            WE1B(Arg0, DerefOf(Index(TEMP, Local0)))
-            Increment(Arg0)
-            Increment(Local0)
-        }
-    }
-    
+        
     Scope (_SB.PCI0.LPC.EC)
     {
         External(BAT0, DeviceObj)
@@ -357,22 +296,38 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_BAT", 0)
         }
         Field (ECR1, ByteAcc, NoLock, Preserve)
         {
-            Offset (0xA0),             BRC0, 8,BRC1, 8,            BFC0, 8,BFC1, 8,            //SBAE,   16,            //SBRS,   16,
-            Offset (0xA8),            BAC0, 8,BAC1, 8,            BVO0, 8,BVO1, 8,
+            Offset (0xA0), 
+            BRC0, 8,BRC1, 8,
+            BFC0, 8,BFC1, 8,
+            //SBAE,   16,
+            //SBRS,   16,
+            Offset (0xA8),
+            BAC0, 8,BAC1, 8,
+            BVO0, 8,BVO1, 8,
         }
         Field (ECR1, ByteAcc, NoLock, Preserve)
         {
-            Offset (0xA0),             BBM0, 8,BBM1, 8,             //SBMD,   16,
-            Offset (0xA4),            BCC0, 8,BCC1, 8,
+            Offset (0xA0), 
+            BBM0, 8,BBM1, 8, 
+            //SBMD,   16,
+            Offset (0xA4),
+            BCC0, 8,BCC1, 8,
         }
         Field (ECR1, ByteAcc, NoLock, Preserve)
         {
-            Offset (0xA0),             BDC0, 8,BDC1, 8,             BDV0, 8,BDV1, 8,             //SBOM,   16,             //SBSI,   16,             //SBDT,   16,
-            Offset (0xAA),            BSN0, 8,BSN1, 8,
+            Offset (0xA0), 
+            BDC0, 8,BDC1, 8, 
+            BDV0, 8,BDV1, 8, 
+            //SBOM,   16, 
+            //SBSI,   16, 
+            //SBDT,   16,
+            Offset (0xAA),
+            BSN0, 8,BSN1, 8,
         }
         Field (ECR1, ByteAcc, NoLock, Preserve)
         {
-            Offset (0xA0),             BCH0, 8,BCH1, 8,BCH2, 8,BCH3, 8,
+            Offset (0xA0), 
+            BCH0, 8,BCH1, 8,BCH2, 8,BCH3, 8,
         }
         
                     Method (GBIF, 3, NotSerialized)
@@ -779,6 +734,67 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_BAT", 0)
         }
     }
     
+    Method (RE1B, 1, NotSerialized)
+        {
+            OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
+            Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
+            Return(BYTE)
+        }
+        Method (RECB, 2, Serialized)
+        // Arg0 - offset in bytes from zero-based EC
+        // Arg1 - size of buffer in bits
+        {
+            ShiftRight(Add(Arg1,7), 3, Arg1)
+            Name(TEMP, Buffer(Arg1) { })
+            Add(Arg0, Arg1, Arg1)
+            Store(0, Local0)
+            While (LLess(Arg0, Arg1))
+            {
+                Store(RE1B(Arg0), Index(TEMP, Local0))
+                Increment(Arg0)
+                Increment(Local0)
+            }
+            Return(TEMP)
+        }
+        
+        Method (WE1B, 2, NotSerialized)
+        {
+            OperationRegion(ERAM, EmbeddedControl, Arg0, 1)
+            Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }
+            Store(Arg1, BYTE)
+        }
+        
+        Method (WECB, 3, Serialized)
+        // Arg0 - offset in bytes from zero-based EC
+        // Arg1 - size of buffer in bits
+        // Arg2 - value to write
+        {
+            ShiftRight(Add(Arg1,7), 3, Arg1)
+            Name(TEMP, Buffer(Arg1) { })
+            Store(Arg2, TEMP)
+            Add(Arg0, Arg1, Arg1)
+            Store(0, Local0)
+            While (LLess(Arg0, Arg1))
+            {
+                WE1B(Arg0, DerefOf(Index(TEMP, Local0)))
+                Increment(Arg0)
+                Increment(Local0)
+            }
+        }
+    }   
+         
+    Method (B1B2, 2, NotSerialized) { Return (Or (Arg0, ShiftLeft (Arg1, 8))) }
+
+    Method (B1B4, 4, NotSerialized)
+    {
+
+        Store(Arg3, Local0)
+        Or(Arg2, ShiftLeft(Local0, 8), Local0)
+        Or(Arg1, ShiftLeft(Local0, 8), Local0)
+        Or(Arg0, ShiftLeft(Local0, 8), Local0)
+        Return(Local0)
+    }
+        
     Scope (_GPE)
     {
         Method (_L0D, 0, NotSerialized)
@@ -807,9 +823,8 @@ DefinitionBlock ("", "SSDT", 2, "T440", "_BAT", 0)
             {
                 Notify (\_SB.SLPB, 0x02)
             }
-         }
-      }    
-   }
+        }
+    }    
 #ifndef NO_DEFINITIONBLOCK
 }
 #endif
